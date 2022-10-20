@@ -1,0 +1,32 @@
+kind: SecurityContextConstraints
+apiVersion: security.openshift.io/v1
+metadata:
+  name: logging
+  annotations:
+    kubernetes.io/description: privileged
+allowPrivilegedContainer: true
+allowHostNetwork: true
+allowHostDirVolumePlugin: true
+priority: null
+allowedCapabilities: []
+allowHostPorts: true
+allowHostPID: true
+allowHostIPC: true
+readOnlyRootFilesystem: false
+requiredDropCapabilities: []
+defaultAddCapabilities: []
+runAsUser:
+  type: RunAsAny
+seLinuxContext:
+  type: MustRunAs
+fsGroup:
+  type: MustRunAs
+supplementalGroups:
+  type: RunAsAny
+volumes:
+  - '*'
+users:
+  - 'system:serviceaccount:logging:builder'
+  - 'system:serviceaccount:logging:default'
+  - 'system:serviceaccount:logging:deployer'
+  - 'system:serviceaccount:logging:fluent-bit'
